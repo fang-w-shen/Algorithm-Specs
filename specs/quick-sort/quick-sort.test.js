@@ -14,13 +14,39 @@
 
 function quickSort(nums) {
   // code goes here
+  if (nums.length <= 1) {
+    return nums
+  }
+  else {
+    let pivot = nums.pop() //nums[nums.length - 1]
+
+    let left = nums.filter((a, i) => { return (a < pivot) })
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] == pivot) {
+        left.push(nums[i])
+      }
+    }
+    let right = nums.filter((a, i) => { return (a > pivot) })
+    // let left = []
+    // let right = []
+    // for (let i = 0; i < nums.length - 1; i++) {
+    //   if (nums[i] < pivot) {
+    //     left.push(nums[i]);
+    //   } else {
+    //     right.push(nums[i]);
+    //   }
+    // }
+    return quickSort(left).concat(pivot, quickSort(right))
+    // return [...quickSort(left), pivot, ...quickSort(right)]
+  }
+
 }
 
 // unit tests
 // do not modify the below code
-test.skip("quickSort", function () {
-  const input = [10, 8, 2, 1, 6, 3, 9, 4, 7, 5];
+test("quickSort", function () {
+  const input = [10, 8, 5, 2, 1, 5, 6, 3, 9, 4, 7, 5];
   const answer = quickSort(input);
-
-  expect(answer).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  console.log(answer, '**')
+  expect(answer).toEqual([1, 2, 3, 4, 5, 5, 5, 6, 7, 8, 9, 10]);
 });
