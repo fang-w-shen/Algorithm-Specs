@@ -21,11 +21,43 @@
 
 class ArrayList {
   // code goes here
+  constructor() {
+    this.data = {}
+    this.length = 0
+
+  }
+  get(key) {
+    return this.data[key]
+  }
+  push(val) {
+    this.data[this.length] = val
+    this.length++
+  }
+  pop() {
+    // this.length--
+    // let resp = this.data[this.length]
+    // delete this.data[this.length]
+    // return resp
+    return this.delete(this.length - 1)
+  }
+  delete(key) {
+    let resp = this.get(key)
+    this.#collapse(key)
+    return resp
+  }
+
+  #collapse = (key) => {
+    for (let i = key; i < this.length - 1; i++) {
+      this.data[i] = this.data[i + 1]
+    }
+    delete this.data[this.length - 1]
+    this.length--
+  }
 }
 
 // unit tests
 // do not modify the below code
-describe.skip("ArrayList", function () {
+describe("ArrayList", function () {
   const range = (length) =>
     Array.apply(null, { length: length }).map(Number.call, Number);
   const abcRange = (length) =>
