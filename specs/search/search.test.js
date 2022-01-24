@@ -5,15 +5,37 @@
 
 function linearSearch(id, array) {
   // code goes here
+  let ans;
+  array.forEach((e) => {
+    if (e.id == id) {
+      ans = e
+    }
+  })
+  return ans
 }
 
 function binarySearch(id, array) {
   // code goes here
+  let min = 0
+  let length = array.length - 1
+  let mid = Math.floor(length / 2)
+  let val = array[mid]
+  if (id > val.id) {
+    let slice = array.slice(mid)
+    return binarySearch(id, slice)
+  }
+  else if (id < val.id) {
+    let slice = array.slice(0, mid)
+    return binarySearch(id, slice)
+  }
+  else {
+    return val
+  }
 }
 
 // unit tests
 // do not modify the below code
-test.skip("linear search", function () {
+test("linear search", function () {
   const lookingFor = { id: 5, name: "Brian" };
   expect(
     linearSearch(5, [
@@ -35,7 +57,7 @@ test.skip("linear search", function () {
   ).toBe(lookingFor);
 });
 
-test.skip("binary search", function () {
+test("binary search", function () {
   const lookingFor = { id: 23, name: "Brian" };
   expect(
     binarySearch(23, [
