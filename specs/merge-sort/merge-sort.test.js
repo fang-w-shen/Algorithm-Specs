@@ -1,6 +1,6 @@
 #!/Users/fshen/.asdf/installs/nodejs/12.16.2/bin/node
 
-/*
+/* O(nlogn)
   Write a function that performs mergesort
   Name the function mergeSort
   It will take in a array of numbers and return a sorted array numbers

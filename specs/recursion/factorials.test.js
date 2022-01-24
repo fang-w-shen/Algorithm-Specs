@@ -1,4 +1,4 @@
-/*
+/* O(n)
   Make a function that computes a factorial recursively.
   A factorial is when you take a number n and multiply by each preceding integer until you hit one.
   n * (n-1) * (n-2) ... * 3 * 2 * 1

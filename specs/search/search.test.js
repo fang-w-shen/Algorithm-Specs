@@ -1,4 +1,4 @@
-// for both exercises, the id of the object you're searching for is given to you
+// O(logn) for both exercises, the id of the object you're searching for is given to you
 // as integer. return the whole object that you're looking for
 //
 // it's up to you what to return if the object isn't found (we're not testing that)

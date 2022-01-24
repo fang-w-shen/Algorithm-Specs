@@ -1,6 +1,6 @@
 #!/Users/fshen/workspace/algorithms-exercises-forked/node_modules/.bin/jest
 
-/*
+/* O(logn)
 
   Implement a radix sort in a function called radixSort.
 
@@ -10,15 +10,38 @@
   it ends up being a lot more simple to implement.
 
 */
-
+const getDigit = (num, place) => {
+  return num.toString().split("").reverse().join("")[place] || 0
+}
 function radixSort(array) {
   // code goes here
+  let copy = array
+  let digits = Math.max(...array).toString().length
+
+  let sortQueue = new Array(10).fill().map(() => [])
+  for (let i = 0; i < digits; i++) {
+    while (copy.length) {
+      let num = copy.pop()
+      let number = getDigit(num, i)
+      sortQueue[number].push(num)
+    }
+    for (let j = 0; j < sortQueue.length; j++) {
+      // for (let k = sortQueue[j].length - 1; k >= 0; k--) {
+      //   copy.push(sortQueue[j][k])
+      // }
+      while (sortQueue[j].length) {
+        copy.push(sortQueue[j].pop())
+
+      }
+    }
+  }
+  return copy
 }
 
 // unit tests
 // do not modify the below code
-test.skip("radix sort", function () {
-  test.skip("should sort correctly", () => {
+describe("radix sort", function () {
+  test("should sort correctly", () => {
     const nums = [
       20,
       51,
@@ -67,7 +90,7 @@ test.skip("radix sort", function () {
       3001
     ]);
   });
-  test.skip("should sort 99 random numbers correctly", () => {
+  test("should sort 99 random numbers correctly", () => {
     const fill = 99;
     const nums = new Array(fill)
       .fill()

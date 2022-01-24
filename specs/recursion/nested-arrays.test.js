@@ -1,4 +1,4 @@
-/* 
+/* O(nk)
 
   write a function that accepts an array that only contains
   two types of things: numbers and arrays. those nested arrays

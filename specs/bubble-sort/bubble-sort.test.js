@@ -1,4 +1,4 @@
-/*
+/* O(n^2)
   Write a bubble sort here
   Name the function bubbleSort
   Return the sorted array at the end

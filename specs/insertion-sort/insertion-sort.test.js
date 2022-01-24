@@ -1,4 +1,4 @@
-/*
+/* O(n^2)
   Insertion sort!
   
   Be sure to call your function insertionSort!
@@ -16,7 +16,7 @@
 function insertionSort(nums) {
   // code goes here
   // return nums.sort((a, b) => a - b);
-  nums.forEach((element) => {});
+  nums.forEach((element) => { });
 }
 
 // unit tests
