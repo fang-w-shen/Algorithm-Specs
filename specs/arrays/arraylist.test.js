@@ -26,6 +26,7 @@ class ArrayList {
     this.length = 0
 
   }
+  // O(1)
   get(key) {
     return this.data[key]
   }
@@ -40,6 +41,7 @@ class ArrayList {
     // return resp
     return this.delete(this.length - 1)
   }
+  // O(n)
   delete(key) {
     let resp = this.get(key)
     this.#collapse(key)

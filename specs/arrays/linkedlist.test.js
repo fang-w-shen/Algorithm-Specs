@@ -1,4 +1,4 @@
-/*
+/* ALSO REALLY COOL RECURSIVE NATURE FROM NODE REFERENCE BEHAVIOR
   LinkedList
   
   Name your class / constructor (something you can call new on) LinkedList
@@ -23,17 +23,88 @@
   you work
 */
 
+
+//REALLY COOL RECURSIVE NATURE FROM NODE REFERENCE BEHAVIOR
+//BEFORE NODE GETS DELETED 
 class LinkedList {
   // code goes here
+  constructor() {
+    this.length = 0;
+    this.head = null;
+  }
+  // A PRIVATE FN TO NOT REVEAL INTERNAL DATA
+  #find = (index) => {
+    if (index >= this.length) return null;
+    let current = this.head;
+    // for (let i = 0; i < index; i++) {
+    //   current = current.next;
+    // }
+    let i = 0
+    while (i++ < index) {
+      current = current.next;
+    }
+    return current;
+  }
+  // O(n)
+  get(index) {
+    return this.#find(index).value || void 0
+  }
+  // O(1)
+  push(value) {
+    const node = new Node(value);
+    this.length++;
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+
+    } else {
+      this.tail.next = node;
+      this.tail = node
+    }
+  }
+  // O(1)
+  pop() {
+    return this.delete(this.length - 1)
+  }
+  // O(1)
+  delete(index) {
+    if (index == 0) {
+      if (this.head) {
+
+        this.head = this.head.next
+      }
+      else {
+        this.head = null;
+      }
+      this.length--
+      return this.head.value
+    }
+    // 1p2 2p3 3p4
+    const prevnode = this.#find(index - 1)
+    const theonetoremove = prevnode.next
+    prevnode.next = theonetoremove.next
+    if (!prevnode.next) {
+      return null
+    }
+    this.length--
+    return prevnode.value
+  }
+
 }
 
 class Node {
   // code goes here
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+
+
 }
 
 // unit tests
 // do not modify the below code
-describe.skip("LinkedList", function () {
+describe("LinkedList", function () {
   const range = (length) =>
     Array.apply(null, { length: length }).map(Number.call, Number);
   const abcRange = (length) =>
