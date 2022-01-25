@@ -1,21 +1,21 @@
 /* ALSO REALLY COOL RECURSIVE NATURE FROM NODE REFERENCE BEHAVIOR
   LinkedList
-  
+
   Name your class / constructor (something you can call new on) LinkedList
-  
+
   LinkedList is made by making nodes that have two properties, the value that's being stored and a pointer to
   the next node in the list. The LinkedList then keep track of the head and usually the tail (I would suggest
   keeping track of the tail because it makes pop really easy.) As you may have notice, the unit tests are the
   same as the ArrayList; the interface of the two are exactly the same and should make no difference to the
   consumer of the data structure.
-  
+
   length - integer  - How many elements in the list
   push   - function - accepts a value and adds to the end of the list
   pop    - function - removes the last value in the list and returns it
   get    - function - accepts an index and returns the value at that position
-  delete - function - accepts an index, removes value from list, collapses, 
+  delete - function - accepts an index, removes value from list, collapses,
                       and returns removed value
-                      
+
   I would suggest making a second class, a Node class. However that's up to you how you implement it. A Node
   has two properties, value and next.
 
@@ -25,28 +25,31 @@
 
 
 //REALLY COOL RECURSIVE NATURE FROM NODE REFERENCE BEHAVIOR
-//BEFORE NODE GETS DELETED 
+//BEFORE NODE GETS DELETED
 class LinkedList {
   // code goes here
   constructor() {
-    this.length = 0;
-    this.head = null;
+    this.length = 0
+    this.head = null
   }
   // A PRIVATE FN TO NOT REVEAL INTERNAL DATA
   #find = (index) => {
-    if (index >= this.length) return null;
+    if (index >= this.length) {
+      return { value: null };
+    }
     let current = this.head;
-    // for (let i = 0; i < index; i++) {
-    //   current = current.next;
-    // }
-    let i = 0
-    while (i++ < index) {
+    for (let i = 0; i < index; i++) {
       current = current.next;
     }
+    // let i = 0
+    // while (i++ < index) {
+    //   current = current.next;
+    // }
     return current;
   }
   // O(n)
   get(index) {
+    console.log(this.#find(index))
     return this.#find(index).value || void 0
   }
   // O(1)
@@ -68,26 +71,33 @@ class LinkedList {
   }
   // O(1)
   delete(index) {
-    if (index == 0) {
+    if (index < 0) {
+      return null
+    }
+    else if (index == 0) {
       if (this.head) {
 
         this.head = this.head.next
       }
       else {
-        this.head = null;
+        this.head = null
+        this.tail = null
       }
       this.length--
       return this.head.value
     }
     // 1p2 2p3 3p4
-    const prevnode = this.#find(index - 1)
-    const theonetoremove = prevnode.next
-    prevnode.next = theonetoremove.next
-    if (!prevnode.next) {
+    if (index >= this.length) {
       return null
     }
+    const prevnode = this.#find(index - 1)
+    let copy = prevnode.next
+    prevnode.next = prevnode.next.next
+    if (!prevnode.next) {
+      this.tail = prevnode
+    }
     this.length--
-    return prevnode.value
+    return copy.value
   }
 
 }
@@ -148,6 +158,9 @@ describe("LinkedList", function () {
 
   test("delete", () => {
     abcRange(26).map((character) => list.push(character));
+    list.delete(26);
+    expect(list.length).toEqual(26);
+    // v w x y z
     list.delete(13);
     expect(list.length).toEqual(25);
     expect(list.get(12)).toEqual("m");
