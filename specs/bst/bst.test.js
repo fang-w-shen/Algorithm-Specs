@@ -1,5 +1,5 @@
 /*
-
+O(logn)
 Binary Search Tree!
 
 Name your class Tree. 
@@ -18,20 +18,64 @@ right - Node/object - the right node which itself may be another tree
 
 class Tree {
   // code goes here
+  constructor(val) {
+    this.node
+  }
+  add(val) {
+    if (!this.node) {
+      this.node = new Node(val)
+    }
+    else {
+      let head = this.node
+      let compared = true;
+      while (compared) {
+        compared = false
+        if (val > head.value) {
+          if (!head.right) {
+            head.right = new Node(val)
+          }
+          else {
+            head = head.right
+            compared = true
+          }
+        }
+        else if (val <= head.value) {
+          if (!head.left) {
+            head.left = new Node(val)
+          }
+          else {
+            head = head.left
+            compared = true
+          }
+        }
+      }
+      return this
+    }
+  }
+  toObject() {
+    return this.node;
+  }
 }
 
 // you might consider using a Node class too
-// class Node {
-//   // code maybe goes here
-// }
+class Node {
+  // code maybe goes here
+  constructor(val) {
+    this.right = null
+    this.left = null
+    this.value = val
+  }
+}
 
 // unit tests
 // do not modify the below code
-describe.skip("Binary Search Tree", function () {
+describe("Binary Search Tree", function () {
   it("creates a correct tree", () => {
     const nums = [3, 7, 4, 6, 5, 1, 10, 2, 9, 8];
     const tree = new Tree();
-    nums.map((num) => tree.add(num));
+    nums.map((num) => {
+      tree.add(num);
+    });
     const objs = tree.toObject();
     // render(objs, nums);
 

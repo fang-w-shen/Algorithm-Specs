@@ -1,0 +1,74 @@
+{
+  "extends": [
+    "plugin:@nrwl/nx/react",
+    "./eslintrc.json"
+  ],
+  "plugins": [
+    "import",
+    "sort-keys-fix",
+    "typescript-sort-keys",
+    "unused-imports"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
+      "rules": {
+        "import/order": [
+          1,
+          {
+            "groups": [
+              "builtin",
+              "external",
+              "parent",
+              "sibling",
+              "internal"
+            ],
+            "pathGroups": [
+              {
+                "pattern": "react",
+                "group": "builtin",
+                "position": "before"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": [
+              "react"
+            ],
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
+          }
+        ],
+        "react/jsx-sort-props": 1,
+        "react/jsx-sort-default-props": 1,
+        "sort-keys": 1,
+        "sort-keys-fix/sort-keys-fix": 1,
+        "typescript-sort-keys/interface": 1,
+        "typescript-sort-keys/string-enum": 1,
+        "unused-imports/no-unused-imports": 1
+      }
+    },
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "rules": {}
+    }
+  ]
+}
