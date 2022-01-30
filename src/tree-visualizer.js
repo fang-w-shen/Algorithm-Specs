@@ -44,7 +44,7 @@ const diagRight = _.merge(
 const target = document.getElementById("target");
 
 const findMaxDepth = (node) => {
-    if (!node) return 0;
+    if (!node) return -1;
     const left = findMaxDepth(node.left);
     const right = findMaxDepth(node.right);
     return left > right ? left + 1 : right + 1;

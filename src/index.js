@@ -12,7 +12,7 @@ const App = () => {
         <nav>
           <ul>
             <li>
-              <Link to="/sort">Sorts</Link>
+              <Link to="/sort">Sort</Link>
             </li>
             <li>
               <Link to="/tree">Tree</Link>
