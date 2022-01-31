@@ -195,7 +195,28 @@ class Node2 {
 }
 
 export default function TreeComponent() {
-    const nums = _.shuffle(_.range(100));// [3, 2, 1, 5, 4, 6] 
+    //TYPES OF TRAVERSALS
+    /// preorder always makes exact copy if added to tree in same way
+    //[8, 3, 1, 6, 4, 7, 10, 14, 13]
+
+    // inorder always in order
+    //[1, 3, 5, 6, 7, 8, 10, 13, 14]
+
+    // postorder good for deleting all things in tree bc visits both nodes
+    //[1, 4, 7, 6, 3, 13, 14, 10, 8]
+    const nums = [
+        8,
+        4,
+        3,
+        2,
+        5,
+        7,
+        6,
+        12,
+        10,
+        9,
+        11
+    ]//_.shuffle(_.range(100));// [3, 2, 1, 5, 4, 6] 
     const tree = new Tree();
     const tree2 = new Tree2();
     nums.map((num) => { tree.add(num); tree2.add(num) });

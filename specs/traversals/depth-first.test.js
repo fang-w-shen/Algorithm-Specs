@@ -1,18 +1,65 @@
-const preorderTraverse = (node, array) => {
+const preorderTraverse = (node, array, steps, count) => {
   // code goes here
+  steps.push(1)
+  count++
+  array.push(node.value)
+  if (node.left) {
+    count = preorderTraverse(node.left, array, steps, count)[2]
+  }
+  if (node.right) {
+    count = preorderTraverse(node.right, array, steps, count)[2]
+  }
+  return [array, steps, count]
+
+  // steps.push(1)
+  // count++
+  // if (!node) return [array, steps, count]
+  // array.push(node.value);
+  // array = preorderTraverse(node.left, array, steps, count)[0];
+  // array = preorderTraverse(node.right, array, steps, count)[0];
+  // return [array, steps, count];
 };
 
 const inorderTraverse = (node, array) => {
   // code goes here
+  if (node.left)
+    inorderTraverse(node.left, array)
+
+  array.push(node.value)
+
+  if (node.right)
+    inorderTraverse(node.right, array)
+
+  return array
+
+  // if (!node) return;
+  // inorderTraverse(node.left, array);
+  // array.push(node.value);
+  // inorderTraverse(node.right, array);
+  // return array;
 };
 
 const postorderTraverse = (node, array) => {
   // code goes here
+  if (node.left)
+    postorderTraverse(node.left, array)
+
+  if (node.right)
+    postorderTraverse(node.right, array)
+
+  array.push(node.value)
+  return array
+
+  if (!node) return;
+  postorderTraverse(node.left, array);
+  postorderTraverse(node.right, array);
+  array.push(node.value);
+  return array;
 };
 
 // unit tests
 // do not modify the below code
-test.skip("depth-first traversals", function () {
+describe("depth-first traversals", function () {
   const tree = {
     value: 8,
     left: {
@@ -58,7 +105,8 @@ test.skip("depth-first traversals", function () {
   };
 
   it("preorderTraverse", () => {
-    expect(preorderTraverse(tree, [])).toEqual([
+    let ans = preorderTraverse(tree, [], [], 0)
+    expect(ans[0]).toEqual([
       8,
       4,
       3,
