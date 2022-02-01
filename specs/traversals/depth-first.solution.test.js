@@ -24,7 +24,7 @@ const postorderTraverse = (node, array) => {
 
 // unit tests
 // do not modify the below code
-test("depth-first traversals", function () {
+describe("depth-first traversals", function () {
   const tree = {
     value: 8,
     left: {
