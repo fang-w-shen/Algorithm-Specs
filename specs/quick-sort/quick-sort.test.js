@@ -20,12 +20,12 @@ function quickSort(nums) {
   else {
     let pivot = nums.pop() //nums[nums.length - 1]
 
-    let left = nums.filter((a, i) => { return (a < pivot) })
-    for (let i = 0; i < nums.length; i++) {
-      if (nums[i] == pivot) {
-        left.push(nums[i])
-      }
-    }
+    let left = nums.filter((a, i) => { return (a <= pivot) })
+    // for (let i = 0; i < nums.length; i++) {
+    //   if (nums[i] == pivot) {
+    //     left.push(nums[i])
+    //   }
+    // }
     let right = nums.filter((a, i) => { return (a > pivot) })
     // let left = []
     // let right = []
@@ -36,6 +36,9 @@ function quickSort(nums) {
     //     right.push(nums[i]);
     //   }
     // }
+
+    //  THIS IS A STABLE VERSION OF QUICK SORT SINCE WE'RE RETAINING ORDER
+    //  NOT USUALLY THE CASE
     return quickSort(left).concat(pivot, quickSort(right))
     // return [...quickSort(left), pivot, ...quickSort(right)]
   }

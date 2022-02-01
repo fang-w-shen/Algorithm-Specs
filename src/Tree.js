@@ -220,9 +220,53 @@ export default function TreeComponent() {
     const tree = new Tree();
     const tree2 = new Tree2();
     nums.map((num) => { tree.add(num); tree2.add(num) });
+    const apple = {
+        value: "A",
+        left: {
+            value: "B",
+            left: {
+                value: "D",
+                left: {
+                    value: "G",
+                    left: null,
+                    right: null
+                },
+                right: null
+            },
+            right: {
+                value: "E",
+                left: null,
+                right: {
+                    value: "H",
+                    left: {
+                        value: "K",
+                        left: null,
+                        right: null
+                    }
+                }
+            }
+        },
+        right: {
+            value: "C",
+            left: {
+                value: "F",
+                left: {
+                    value: "I",
+                    left: null,
+                    right: null
+                },
+                right: {
+                    value: "J",
+                    left: null,
+                    right: null
+                }
+            },
+            right: null
+        }
+    };
     const objs = tree.toObject();
     const objs2 = tree2.toObject();
-
+    const objs3 = apple
     return (
         <>
             <TreeViz root={objs} />

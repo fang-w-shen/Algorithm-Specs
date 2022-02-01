@@ -1,5 +1,5 @@
 /*
-  
+  O(nlogn)
   Create a function called heapSort that accepts an array and performs a heap sort on it in place (heap sorts are normally destructive)
   
   You will probably need at least two more functions: heapify and createMaxHeap
@@ -8,11 +8,15 @@
 
 const heapSort = (array) => {
   // code
+  for (let i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+    createMaxHeap()
+  }
   return array;
 };
 
 const createMaxHeap = (array) => {
   // code
+
 };
 
 const heapify = (array, index, heapSize) => {

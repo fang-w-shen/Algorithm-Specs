@@ -1,7 +1,10 @@
 #!/Users/fshen/workspace/algorithms-exercises-forked/node_modules/.bin/jest
 
-/* O(logn)
+/* O(nk)
 
+  Spatial (n+k)
+  
+  ALSO CALLED BUCKET SORTING
   Implement a radix sort in a function called radixSort.
 
   You'll probably need several functions
