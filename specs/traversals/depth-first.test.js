@@ -1,3 +1,12 @@
+//TYPES OF TRAVERSALS
+/// preorder always makes exact copy if added to tree in same way
+//[8, 3, 1, 6, 4, 7, 10, 14, 13]
+
+// inorder always in order
+//[1, 3, 5, 6, 7, 8, 10, 13, 14]
+
+// postorder good for deleting all things in tree bc visits both nodes
+//[1, 4, 7, 6, 3, 13, 14, 10, 8]
 const preorderTraverse = (node, array, steps, count) => {
   // code goes here
   steps.push(1)
