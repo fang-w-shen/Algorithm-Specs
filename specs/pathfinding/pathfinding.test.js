@@ -31,21 +31,20 @@ function findShortestPathLength(maze, [xA, yA], [xB, yB]) {
   visited[yB][xB].openedBy = "B";
   let aq = [visited[yA][xA]]
   let bq = [visited[yB][xB]]
-  let found = false
   let steps = 0
   while (aq.length && bq.length) {
     steps++
     let aNeighbors = []
     let bNeighbors = []
-    // USE AQUEUE TO GET ANEIGHBORS
 
+    // USE AQUEUE TO GET ANEIGHBORS
     while (aq.length) {
       const coord = aq.shift()
       aNeighbors.push(...getNeighbors(visited, coord.x, coord.y))
     }
-    // USE NEW ANEIGHBORS TO REFILL AQUEUE
 
-    while (!found && aNeighbors.length) {
+    // USE NEW ANEIGHBORS TO REFILL AQUEUE
+    while (aNeighbors.length) {
       let neighbor = aNeighbors.shift()
       if (neighbor && neighbor.openedBy == "B") {
         return neighbor.iteration + steps
@@ -58,14 +57,15 @@ function findShortestPathLength(maze, [xA, yA], [xB, yB]) {
       }
 
     }
+
     // USE BQUEUE TO GET BNEIGHBORS
     while (bq.length) {
       const coord = bq.shift()
       bNeighbors.push(...getNeighbors(visited, coord.x, coord.y))
-      // console.log(aNeighbors)
     }
+
     // USE NEW BNEIGHBORS TO REFILL BQUEUE
-    while (!found && bNeighbors.length) {
+    while (bNeighbors.length) {
       let neighbor = bNeighbors.shift()
       if (neighbor && neighbor.openedBy == "A") {
         return neighbor.iteration + steps
