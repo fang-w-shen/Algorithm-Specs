@@ -16,23 +16,75 @@ class Node {
   // you don't have to use this data structure, this is just how I did it
   // you'll almost definitely need more methods than this and a constructor
   // and instance variables
+
+  constructor(string) {
+    this.value = string[0]
+    this.end = false
+    this.children = []
+    if (string.length > 1) {
+      this.children.push(new Node(string.substr(1)))
+    }
+    else {
+      this.end = true
+    }
+  }
+
+  add(string) {
+    let value = string[0]
+    let next = string.substr(1)
+    for (let i = 0; i < this.children.length; i++) {
+      let child = this.children[i]
+      if (child.value == value) {
+        if (next) {
+          child.add(next)
+        }
+        else {
+          child.end = true
+        }
+        return
+      }
+    }
+    this.children.push(new Node(string))
+  }
+  #complete = (search, built, suggestions) => {
+    if (suggestions.length >= 3 || (search && search[0] !== this.value)) {
+      return suggestions
+    }
+    if (this.end) {
+      suggestions.push(`${built}${this.value}`)
+    }
+    for (let i = 0; i < this.children.length; i++) {
+      let child = this.children[i]
+      child.#complete(search.substr(1), `${built}${this.value}`, suggestions)
+    }
+    return suggestions
+
+  }
   complete(string) {
-    return [];
+
+    let completions = []
+    for (let i = 0; i < this.children.length; i++) {
+      let child = this.children[i]
+      completions.push(...child.#complete(string, "", []))
+    }
+    return completions;
   }
 }
 
 const createTrie = (words) => {
   // you do not have to do it this way; this is just how I did it
   const root = new Node("");
-
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i]
+    root.add(word.toLowerCase())
+  }
   // more code should go here
-
   return root;
 };
 
 // unit tests
 // do not modify the below code
-describe.skip("tries", function () {
+describe("tries", function () {
   test("dataset of 10 – san", () => {
     const root = createTrie(CITY_NAMES.slice(0, 10));
     const completions = root.complete("san");
@@ -133,7 +185,7 @@ describe.skip("tries", function () {
   });
 });
 
-describe.skip("edge cases", () => {
+describe("edge cases", () => {
   test("handle whole words – seattle", () => {
     const root = createTrie(CITY_NAMES.slice(0, 30));
     const completions = root.complete("seattle");
